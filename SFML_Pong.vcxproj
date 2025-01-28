@@ -134,6 +134,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bat.cpp" />
     <ClCompile Include="SFML_Pong.cpp" />
   </ItemGroup>
   <ItemGroup>
