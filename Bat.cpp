@@ -1,3 +1,5 @@
+// See Bat.h file 
+
 #include "Bat.h"
 
 // this is the constructor and it is called when we create an object
