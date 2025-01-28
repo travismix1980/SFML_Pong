@@ -1,3 +1,6 @@
+// Bat.h  This class is to create a player bat ... to hit our ball back to the player opponent.
+// By Travis Mix
+
 #pragma once
 #include <SFML/Graphics.hpp>
 
