@@ -7,6 +7,7 @@ Bat::Bat(float startX, float startY) {
 	m_Position.x = startX;
 	m_Position.y = startY;
 
+	// this seems to small maybe make it bigger later
 	m_Shape.setSize(sf::Vector2f(50, 5));
 	m_Shape.setPosition(m_Position);
 }
@@ -20,6 +21,13 @@ FloatRect Bat::getPosition() {
 RectangleShape Bat::getShape() {
 	return m_Shape;
 }
+
+// make the bat bigger or smaller
+// it is default set to x: 50, y: 5
+void Bat::setBatSize(float x, float y) {
+	m_Shape.setSize(sf::Vector2f(x, y));
+}
+
 
 // move the bat left
 void Bat::moveLeft() {
