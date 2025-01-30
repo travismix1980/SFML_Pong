@@ -2,6 +2,7 @@
 // by Travis Mix
 
 #include "Bat.h"
+#include "Ball.h"
 #include <sstream>
 #include <cstdlib>
 #include <SFML/Graphics.hpp>
@@ -24,6 +25,7 @@ int main() {
 	bat.setBatSize(180, 10);
 
 	// We will add the Ball here
+	Ball ball(1920 / 2, 0);
 
 	// Create a Text object called hud 
 	Text hud;
@@ -86,10 +88,55 @@ int main() {
 		// update the bat
 		bat.update(dt);
 
+		// update the ball
+		ball.update(dt);
+
 		// update the hud
 		std::stringstream ss;
 		ss << "Score: " << score << " Lives: " << lives;
 		hud.setString(ss.str());
+
+		// check for collisions
+		// handle the ball hitting the bottom
+		if (ball.getPosition().top > window.getSize().y) {
+			// reverse the ball direction
+			ball.reboundBottom();
+
+			// remove a life;
+			lives--;
+
+			// check for 0 lives remaining
+			if (lives < 1) {
+				// reset the score 
+				score = 0;
+
+				// reset lives
+				lives = 3;
+
+				// reset ball speed
+				ball.setSpeed(1400);
+			}
+		}
+
+		// handle the ball hitting the top of the screen
+		if (ball.getPosition().top < 0) {
+			ball.reboundBatOrTop();
+		}
+
+		// if the ball hits the side of the screen
+		if (ball.getPosition().left < 0 || ball.getPosition().left + ball.getPosition().width > window.getSize().x) {
+			ball.reboundSides();
+		}
+
+		// handle the ball hitting the bat
+		if (ball.getPosition().intersects(bat.getPosition())) {
+			// hit detected so reverse ball and add 1 to score
+			ball.reboundBatOrTop();
+			score += 10;
+
+			// increase the ball speed slightly for added challenge
+			ball.increaseSpeed();
+		}
 
 		// draw the bat, the ball, and the hud
 		
@@ -99,6 +146,7 @@ int main() {
 		// draw the new stuff
 		window.draw(hud);
 		window.draw(bat.getShape());
+		window.draw(ball.getShape());
 
 		// display on the screen what we drew
 		window.display();
