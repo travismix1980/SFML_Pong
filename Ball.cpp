@@ -50,7 +50,7 @@ void Ball::resizeBall(float x, float y) {
 }
 
 void Ball::increaseSpeed() {
-	m_Speed *= 1.1f;
+	m_Speed += 20;
 }
 
 void Ball::setSpeed(float speed) {

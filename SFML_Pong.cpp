@@ -26,6 +26,12 @@ int main() {
 
 	// We will add the Ball here
 	Ball ball(1920 / 2, 0);
+	
+	// making the ball bigger.  I know 
+	// that this can be done in the ball class
+	// but this is easier and makes it more 
+	// modable
+	ball.resizeBall(14, 14);
 
 	// Create a Text object called hud 
 	Text hud;
